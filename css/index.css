@@ -1,0 +1,55 @@
+.navbar{
+    background-color: rgb(161,27,27);
+}
+.navbar-text{
+    color: white;
+    position: relative;
+    right: 500px;
+    font-size: large;
+}
+h1{
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-style: normal;
+    position: relative;
+    left: 30px;
+}
+#email{
+    color: black;
+    width: fit-content;
+    border-color: transparent;
+    border-radius: 8px;
+    font-family: serif;
+    position: relative;
+    left: 60px;
+}
+#but{
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(161,27,27);
+    position: relative;
+    left: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+ .responsive-box {
+            width: 100%; 
+            max-width: 300px;
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: transparent; 
+            border: 1px solid white; 
+            border-radius: 30px; 
+            box-shadow: 0px 0px 50px rgba(19, 19, 19, 0.2); 
+ }
+.container {
+    
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        min-height: 30vh;
+}
+#result{
+    color: white;
+}

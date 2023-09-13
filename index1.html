@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>certificate</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg ">
+        <a class="navbar-brand" href="#">
+            <img src="img/demo.jpg" alt="Logo">
+        </a>
+    </nav>
+
+    <body style="background-image: url('img/bg.jpg');width: 100%; min-height: 100vh;background-position: center;background-size: cover;position: relative;">
+        <div class="container"></div>
+            <div class="responsive-box">
+                <h1>Check Your Details</h1><br><br>
+                <input id="email" type="email" name="email" placeholder="Enter your email"><br><br>
+                <input id="but" type="submit" value="Next" onclick="checkEmailAndDisplayData()">
+                <p id="result" style="color: white;"></p>
+            </div>
+        </div>
+    </body>
+
+
+
+
+    <!-- <h1>Techquest Data Display</h1> -->
+    <!-- <label for="email">Enter Email:</label>
+    <input type="text" id="email" placeholder="Enter email..."> -->
+    <!-- <button onclick="checkEmailAndDisplayData()">Get Techquest ID</button> -->
+    <!-- <h1 id="result" style="color: white;"></h1> -->
+
+    <script>
+        // Function to check email and get techquest_id
+        function checkEmailAndDisplayData() {
+            const emailToFind = document.getElementById("email").value.trim();
+            const resultDiv = document.getElementById("result");
+
+            if (emailToFind !== "") {
+                // URL to fetch data from "https://mzcet.in/techquest23/returnjson.php"
+                const apiUrl = "https://mzcet.in/techquest23/returnjson.php";
+
+                // Fetch data from the URL
+                fetch(apiUrl)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        // Find the entry with the given email
+                        const userData = data.find((item) => item.Email === emailToFind);
+
+                        if (userData) {
+                            const techquestId = userData.techquest_id;
+
+                            // Check if techquestId is valid and not empty
+                            if (techquestId) {
+                                // Redirect to the second HTML page with the techquestId as a URL parameter
+                                window.location.href = `dd.html?techquestId=${techquestId}`;
+                            } else {
+                                resultDiv.innerHTML = `No Techquest ID found for Email: ${emailToFind}.`;
+                            }
+                        } else {
+                            // If email is not found, inform the user
+                            resultDiv.innerHTML = `Email ${emailToFind} not found in the data.`;
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching data:", error);
+                        resultDiv.innerHTML = "An error occurred while fetching data.";
+                    });
+            } else {
+                resultDiv.innerHTML = "Please enter an email address.";
+            }
+        }
+    </script>
+</body>
+</html>

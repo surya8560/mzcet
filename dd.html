@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techquest Certificate</title>
+    <style>
+        /* Add CSS styles for positioning text on top of the image */
+        .certificate {
+            position: relative;
+            max-width: 100%;
+            width: 700px;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align:center;
+            font-size: 14px;
+             
+            font-weight:lighter;
+            color: black; /* Text color */
+         /* Text shadow for visibility */
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <img src="img/pcer.png" alt="Certificate Image" style="width: 700px; align-items: center;">
+        <div class="text-overlay" id="certificateText">
+            <!-- Certificate text will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to set the certificate text
+        function setCertificateText(entry, collegeName) {
+            const certificateText = document.getElementById("certificateText");
+            certificateText.innerHTML = `<p>This certificate is provided to ${entry.Member} from ${collegeName.CollegeName} for having participated in ${entry.Events} of TECHQUEST'23 on SEPTEMBER 15, 2023.</p>`;
+        }
+
+        // Fetch entry data from external source (replace with actual source)
+        // You can use fetch or any other method to retrieve the data
+        fetch('https://mzcet.in/techquest23/api/arrivalorderjson.php')
+            .then(response => response.json())
+            .then(entryData => {
+                // Replace this with the actual entry data you want to display
+                const entry = {
+                    Member: entryData[0].Member, // Replace with the desired member value
+                    Events: entryData[0].Events, // Replace with the desired events value
+                };
+
+                // Fetch collegeName data from external source (replace with actual source)
+                fetch('https://mzcet.in/techquest23/returnjson.php')
+                    .then(response => response.json())
+                    .then(collegeNameData => {
+                        // Replace this with the actual collegeName data you want to display
+                        const collegeName = {
+                            CollegeName: collegeNameData[0].CollegeName, // Replace with the desired collegeName value
+                        };
+
+                        // Set the certificate text with the retrieved data
+                        setCertificateText(entry, collegeName);
+                    })
+                    .catch(error => {
+                        console.error("Error fetching collegeName data:", error);
+                    });
+            })
+            .catch(error => {
+                console.error("Error fetching entry data:", error);
+            });
+    </script>
+</body>
+</html>
